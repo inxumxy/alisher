@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugma orqali havola ochish</title>
+    <style>
+        /* Sahifa dark (qorong'i) mavzusi */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Courier New", Courier, monospace; /* Monospace text stili */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1c1c1c;
+            background-image: url('https://ws398.hostinx.ru/pic/1.jpg'); /* Anime qizning fon rasmi */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white; /* Matn rangini oq qilamiz */
+        }
+
+        /* Tugmani bezash */
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff4b5c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: "Courier New", Courier, monospace; /* Monospace text stili */
+        }
+
+        /* Tugmaga hover (ustiga kursor olib borilganda) effekt */
+        button:hover {
+            background-color: #ff6b81;
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="openURL('https://t.me/inxumxy')">Telegram</button>
+
+    <script>
+        function openURL(url) {
+            window.open(url, '_blank'); // yangi sahifada URL ochish
+        }
+    </script>
+
+</body>
+</html>
