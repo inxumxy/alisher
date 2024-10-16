@@ -1,54 +1,36 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tugma orqali havola ochish</title>
-    <style>
-        /* Sahifa dark (qorong'i) mavzusi */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Courier New", Courier, monospace; /* Monospace text stili */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #1c1c1c;
-            background-image: url('https://ws398.hostinx.ru/pic/3.jpg'); /* Anime qizning fon rasmi */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white; /* Matn rangini oq qilamiz */
-        }
+<title>Text to Image</title>
+<script>
+function generateImage() {
+  // Kirish matnini olish
+  var textInput = document.getElementById("textInput").value;
 
-        /* Tugmani bezash */
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #ff4b5c;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-family: "Courier New", Courier, monospace; /* Monospace text stili */
-        }
-
-        /* Tugmaga hover (ustiga kursor olib borilganda) effekt */
-        button:hover {
-            background-color: #ff6b81;
-        }
-    </style>
+  // AJAX so'rovi yuborish
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://api-inference.huggingface.co/models/ZB-Tech/Text-to-Image");
+  xhr.setRequestHeader("Authorization", "Bearer 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");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      // Tasvirni olish va ko'rsatish
+      var imageData = xhr.response;
+      var image = document.createElement("img");
+      image.src = "data:image/png;base64," + imageData;
+      document.getElementById("imageContainer").appendChild(image);
+    } else {
+      console.error("Xatolik: " + xhr.status);
+    }
+  };
+  xhr.send(JSON.stringify({ "inputs": textInput }));
+}
+</script>
 </head>
 <body>
-
-    <button onclick="openURL('https://t.me/inxumxy')">Telegram</button>
-
-    <script>
-        function openURL(url) {
-            window.open(url, '_blank'); // yangi sahifada URL ochish
-        }
-    </script>
-
+  <h1>Text to Image</h1>
+  <input type="text" id="textInput" placeholder="Tasvir uchun matn kiriting...">
+  <button onclick="generateImage()">Tasvirni yarating</button>
+  <div id="imageContainer"></div>
 </body>
 </html>
